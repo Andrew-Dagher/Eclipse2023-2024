@@ -1,6 +1,8 @@
+package udemy_course;
+
 import java.util.ArrayList;
 
-public class ArrayList_Test {
+public class ArrayList_methods {
 
 	public static void main(String[] args) {
 		
