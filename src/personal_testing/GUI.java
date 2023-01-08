@@ -57,7 +57,7 @@ public class GUI implements ActionListener{
 		
 		//
 		success = new JLabel("");
-		success.setBounds(10,110,300,25);
+		success.setBounds(10,110,350,25);
 		panel.add(success);
 		success.setText("");
 		
