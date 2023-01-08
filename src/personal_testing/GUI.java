@@ -28,7 +28,7 @@ public class GUI implements ActionListener{
 		JPanel panel = new JPanel();
 		
 		frame.setSize(350,200);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//close/exit application correctly	
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//close code when you close the pop-up
 		frame.add(panel);//add the panel to the frame
 	
 		panel.setLayout(null);
@@ -37,7 +37,7 @@ public class GUI implements ActionListener{
 		userlabel = new JLabel("User");//MAKING A LABEL
 		userlabel.setBounds(10,20,80,25);//location and size of panel
 		panel.add(userlabel);//add the label "user" to the panel
-		userText = new JTextField();
+		userText = new JTextField();//MAKING A PLACE TO WRITE USERNAME
 		userText.setBounds(100,20,165,25);
 		panel.add(userText);//add text box to the panel
 		
@@ -55,7 +55,7 @@ public class GUI implements ActionListener{
 		button.addActionListener(new GUI());
 		panel.add(button);
 		
-		//
+		//creates message when button is pressed
 		success = new JLabel("");
 		success.setBounds(10,110,350,25);
 		panel.add(success);
