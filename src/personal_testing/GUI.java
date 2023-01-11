@@ -61,7 +61,7 @@ public class GUI implements ActionListener{
 		panel.add(success);
 		success.setText("");
 		
-		
+		//setting the frame to visible must be done at the end
 		frame.setVisible(true);
 	}
 
