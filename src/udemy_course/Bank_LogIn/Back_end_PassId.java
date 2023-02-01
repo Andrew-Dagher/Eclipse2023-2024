@@ -54,7 +54,40 @@ public class Back_end_PassId {
 		}
 		}
 		}
+	
+//	while(playerPos[firstPlayer]<100 && playerPos[secondPlayer]<100) {
+//		int diceValue=flipDice();
+//		System.out.print(" Player "+ player[0]+" got a dice value of "+ diceValue);
+//		playerPos[firstPlayer]+=diceValue;
+//		
+//		if(playerPos[firstPlayer]>100) {
+//			playerPos[firstPlayer]=100-(playerPos[firstPlayer]-100);
+//		}
+//		
+//		for(int ladder: ladders) {
+//			if(playerPos[firstPlayer]==ladder) {
+//				playerPos[firstPlayer]=TopLadder(ladder);
+//				System.out.println(" Player "+player[0]+" climbed a ladder to square "+playerPos[firstPlayer]);
+//				break;
+//		}
+//		for (int snake : snakes) {
+//	      if (playerPos[firstPlayer] == snake) {
+//	          playerPos[firstPlayer] = tailSnake(snake);
+//	          System.out.println(" Player "+player[0]+" was caught by a snake and went down to square "+ playerPos[firstPlayer]);
+//	           break;
+//	      }
+//		}
+//		int temp=firstPlayer;
+//		firstPlayer=secondPlayer;
+//		secondPlayer=temp;
+//
+//		}
+//	}
+//		System.out.println("Player "+(playerPos[0] == 100 ? 1 : 2) + " wins!");
+//	}
+}
+		
 		
 	
-}
+
 
