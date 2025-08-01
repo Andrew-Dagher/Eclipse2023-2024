@@ -1,0 +1,32 @@
+import plotly.graph_objects as go
+
+# Sample data
+labels = ['Product A', 'Product B', 'Product C']
+values = [450, 300, 250]
+yoy_changes = ['+10% YoY', '-5% YoY', '+2% YoY']  # Extra info for hover
+
+# Create pie chart
+fig = go.Figure(
+    data=[
+        go.Pie(
+            labels=labels,
+            values=values,
+            textinfo='percent',     # Shows percent inside pie
+            insidetextorientation='auto',
+            hoverinfo='label+value+percent+text',
+            text=yoy_changes        # This gets shown in hover box
+        )
+    ]
+)
+
+fig.update_traces(
+    marker=dict(line=dict(color='#000000', width=1)),
+    hovertemplate='<b>%{label}</b><br>Value: %{value}<br>%{percent}<br>%{text}<extra></extra>'
+)
+
+fig.update_layout(
+    title='Product Sales Distribution with YoY Change',
+    showlegend=True
+)
+
+fig.show()
