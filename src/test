@@ -1,0 +1,49 @@
+import os
+import subprocess
+
+def sync_bitbucket_repo(
+    bitbucket_token: str,
+    repo_https: str,                    # e.g. "https://bitbucket.org/workspace/repo-name.git"
+    local_root: str,                    # e.g. "/Workspace/Shared/my_repos"
+    user_name: str = "Databricks Bot",
+    user_email: str = "bot@example.com",
+):
+    """
+    Clones or pulls a Bitbucket repo into local_root/repo-name using HTTPS + token.
+    If the repo already exists, it runs a pull.
+    """
+    # derive repo dir name
+    repo_name = repo_https.rstrip("/").split("/")[-1]
+    if repo_name.endswith(".git"):
+        repo_name = repo_name[:-4]
+    repo_dir = os.path.join(local_root, repo_name)
+
+    # token is only used in the subprocess call; never print it
+    auth_url = repo_https.replace("https://", f"https://x-token-auth:{bitbucket_token}@")
+
+    os.makedirs(local_root, exist_ok=True)
+
+    def run(cmd, cwd=None):
+        # helper to run git safely without invoking a shell
+        subprocess.run(cmd, cwd=cwd, check=True)
+
+    try:
+        if not os.path.isdir(os.path.join(repo_dir, ".git")):
+            # fresh clone
+            run(["git", "clone", auth_url], cwd=local_root)
+            # set user config
+            run(["git", "-C", repo_dir, "config", "user.name", user_name])
+            run(["git", "-C", repo_dir, "config", "user.email", user_email])
+            print(f"✓ Repository cloned to {repo_dir}")
+        else:
+            # already exists → pull latest
+            run(["git", "-C", repo_dir, "config", "user.name", user_name])
+            run(["git", "-C", repo_dir, "config", "user.email", user_email])
+            run(["git", "-C", repo_dir, "pull", "--ff-only"])
+            print(f"✓ Repository updated at {repo_dir}")
+    except subprocess.CalledProcessError as e:
+        # scrub the token if it leaks into the error message
+        msg = str(e)
+        if bitbucket_token in msg:
+            msg = msg.replace(bitbucket_token, "***")
+        raise RuntimeError(f"Git operation failed: {msg}") from None
